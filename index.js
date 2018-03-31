@@ -3,10 +3,6 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("hello from express!");
-});
-
 app.get("/name", (req, res) => {
   res.send({
     name: "shady"
