@@ -1,11 +1,10 @@
 const initialState = {
-  message: "Welcome",
-  data: []
+  message: ""
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "WELCOME":
+    case "UNMOUNT":
       return {
         ...state,
         message: action.msg

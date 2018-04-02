@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "../../actions";
+import HomeSub from "./HomeSub";
+import LoginForm from "../forms/LoginForm";
 
 class Home extends Component {
   change() {
@@ -16,8 +18,12 @@ class Home extends Component {
     console.log(this.props);
     return (
       <div>
-        Home, {this.props.home.message}
+        Home,
+        <HomeSub msg={this.props.home.message} />
         <button onClick={() => this.change()}>Change</button>
+        <LoginForm>
+          <h1>Hello from form child Component</h1>
+        </LoginForm>
       </div>
     );
   }
