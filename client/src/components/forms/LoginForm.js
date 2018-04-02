@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import validator from "validator";
 import InlineError from "../messages/InlineError";
+import PropTypes from "prop-types";
 
-export default class Form1 extends Component {
+export default class LoginForm extends Component {
   state = { data: { email: "", password: "" }, errors: {}, lading: false };
+
   validate(data) {
     const errors = {};
     if (!validator.isEmail(data.email)) errors.email = "Invalid email";
     if (!data.password) errors.password = "can't be blank";
     return errors;
   }
+
   handleChange(e) {
     this.setState({
       data: {
@@ -19,13 +22,18 @@ export default class Form1 extends Component {
     });
     console.log(this.state);
   }
+
   handleSubmit(e) {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({
       errors
     });
+    if (Object.keys(errors).length === 0) {
+      this.props.submit(this.state.data);
+    }
   }
+
   render() {
     const { data, errors } = this.state;
     return (
@@ -33,6 +41,7 @@ export default class Form1 extends Component {
         <div>
           <label htmlFor="email">Email:</label>
           <input
+            style={errors.email ? { border: "1px solid red" } : {}}
             type="text"
             name="email"
             value={data.email}
@@ -44,6 +53,7 @@ export default class Form1 extends Component {
         <div>
           <label htmlFor="password">Password:</label>
           <input
+            style={errors.password ? { border: "1px solid red" } : {}}
             type="password"
             name="password"
             value={data.password}
@@ -59,3 +69,7 @@ export default class Form1 extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  submit: PropTypes.func.isRequired
+};

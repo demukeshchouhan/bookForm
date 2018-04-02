@@ -14,6 +14,9 @@ class Home extends Component {
       .then(res => res.json())
       .then(data => console.log(data));
   }
+  submit(data) {
+    console.log(data);
+  }
   render() {
     console.log(this.props);
     return (
@@ -21,9 +24,7 @@ class Home extends Component {
         Home,
         <HomeSub msg={this.props.home.message} />
         <button onClick={() => this.change()}>Change</button>
-        <LoginForm>
-          <h1>Hello from form child Component</h1>
-        </LoginForm>
+        <LoginForm submit={this.submit} />
       </div>
     );
   }
